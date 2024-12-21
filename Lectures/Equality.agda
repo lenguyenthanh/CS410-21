@@ -86,19 +86,20 @@ open ≡-Reasoning
 
 *-distribʳ-+ : (m n o : ℕ) -> (n + o) * m ≡ n * m + o * m
 *-distribʳ-+ m zero o = refl
-*-distribʳ-+ m (suc n) o =
+*-distribʳ-+ m (suc n) o = 
   begin
-    ((suc n + o) * m)
+    (suc n + o) * m
+  ≡⟨⟩ -- \== \< \>
+    (suc (n + o) ) * m
   ≡⟨⟩
-    (m + (n + o) * m)
-  ≡⟨ cong (m +_) (*-distribʳ-+ m n o) ⟩ -- \==\< \>
-    (m + (n * m + o * m))
+    m + (n + o)  * m
+  ≡⟨ cong (m +_) (*-distribʳ-+ m n o) ⟩
+    m + (n * m + o * m)
   ≡˘⟨ +-assoc m (n * m) (o * m) ⟩
-    (m + n * m) + (o * m)
+    (m + n * m) + o * m
   ≡⟨⟩
-    (suc n * m) + (o * m)
+    suc n * m + o * m
   ∎ -- \qed
-
 
 {-
 What have we learnt?

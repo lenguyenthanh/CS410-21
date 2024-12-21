@@ -161,17 +161,11 @@ ex7 x = x tt
 explosion : {A B : Set} -> A -> ¬ A -> B
 explosion a ¬a = ex5 (¬a a)
 
-
-
-
-
-
-
-
-
-{-
 -- Now you try:
 
 materialImplication : {A B : Set} -> (¬ A ⊎ B) -> (A -> B)
-materialImplication = {!!}
--}
+materialImplication (inj₁ x) = λ a → ex5 (x a)
+materialImplication (inj₂ y) = λ a → y
+
+materialImplicationReverse : {A B : Set} ->  (A -> B) -> (¬ A ⊎ B)
+materialImplicationReverse x = {!   !}

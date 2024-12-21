@@ -23,7 +23,7 @@ Pred A = A -> Set
 isEven : ℕ -> Set
 isEven zero = ⊤
 isEven (suc zero) = ⊥
-isEven (suc (suc n)) = isEven n
+isEven (2+ n) = isEven n
 
 
 -- 4 = suc (suc 2)
@@ -73,7 +73,7 @@ fact = _
 ex8 : (n : ℕ) -> isEven n ⊎ isEven (suc n)
 ex8 zero = inj₁ tt
 ex8 (suc zero) = inj₂ tt
-ex8 (suc (suc n)) = ex8 n
+ex8 (2+ n) = ex8 n
 
 -- Note: `A → B` is "just" (_ : A) -> B
 

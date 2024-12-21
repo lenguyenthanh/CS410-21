@@ -61,7 +61,7 @@ revListFast acc (x ∷ xs) = revListFast (x ∷ acc) xs
 
 revAcc : {A : Set}{n m : ℕ} -> Vec A n -> Vec A m -> Vec A (n + m)
 revAcc {A} acc [] = subst (Vec A) (sym (+-identity-right _)) acc
-revAcc {A} acc (x ∷ xs) = subst (Vec A) (sym (+suc _ _)) (revAcc (x ∷ acc) xs)
+revAcc {A} acc (x ∷ vm) = subst (Vec A) (sym (+suc _ _)) (revAcc {A} (x ∷ acc) vm)
 
 reverse : {A : Set}{m : ℕ} -> Vec A m -> Vec A m
 reverse = revAcc []
@@ -138,4 +138,4 @@ aBitContrived : (n m : ℕ) ->
                 (n + m , 16 , λ xs → m ∷ xs)
                     ≡[ ℕ × (Σ[ k ∈ ℕ ] (Vec ℕ k -> Vec ℕ (suc k))) ]
                 (m + n , 4 * 4 , λ xs → m + 0 ∷ xs)
-aBitContrived n m = {!!}
+aBitContrived n m = pair-≡ (+-comm n m) (dpair-≡ refl (funext λ xs -> cong ( _∷ xs) (sym (+-identity-right m))))

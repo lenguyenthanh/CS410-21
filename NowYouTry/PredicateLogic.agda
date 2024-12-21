@@ -96,11 +96,12 @@ ex9 = 4 , tt
 
 curry : {A : Set}{P : A -> Set}{Q : Set} ->
         ((Σ[ x ∈ A ] (P x)) -> Q) -> ((x : A) -> (P x -> Q))
-curry f a p = f (a , p)
+curry f = \ a -> \ pa → f (a , pa)
+-- curry f = λ a pa → f (a , pa)
 
 uncurry : {A : Set}{P : A -> Set}{Q : Set} ->
           ((x : A) -> (P x -> Q)) -> ((Σ[ x ∈ A ] (P x)) -> Q)
-uncurry g (a , p) = g a p
+uncurry g (a , pa) = g a pa
 
 
 -- Note: A × B is "just" Σ[ _ ∈ A ] B
@@ -112,4 +113,4 @@ uncurry g (a , p) = g a p
 theoremofChoice : {A B : Set}{R : A -> B -> Set} ->
                   ((a : A) -> Σ[ b ∈ B ] (R a b)) ->
                   (Σ[ f ∈ (A -> B) ] ((a : A) -> R a (f a)))
-theoremofChoice p = {!!}
+theoremofChoice p = (λ a -> p a .proj₁), λ a → p a .proj₂

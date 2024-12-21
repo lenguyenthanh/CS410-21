@@ -164,6 +164,7 @@ explosion a ¬a = ex5 (¬a a)
 -- Now you try:
 
 materialImplication : {A B : Set} -> (¬ A ⊎ B) -> (A -> B)
-materialImplication = {!!}
+materialImplication (inj₁ na) = λ a -> ex5 (na a)
+materialImplication (inj₂ b) = λ _ → b
 
 -- what about `(A -> B) -> (¬ A ⊎ B)`?

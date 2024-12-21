@@ -117,22 +117,21 @@ What have we learnt?
 -- HINT: You will need to use two facts we have proven above (one backwards)
 
 *-assoc : (n m k : ℕ) -> n * (m * k) ≡ (n * m) * k
-*-assoc zero m k = {!!}
-*-assoc (suc n) m k = begin
-  suc n * (m * k)
-    ≡⟨ {!!} ⟩
-  (suc n * m) * k
+*-assoc zero m k = refl
+*-assoc (suc n) m k =
+  begin
+    suc n * (m * k)
+  ≡⟨⟩
+    (1 + n) * (m * k)
+  ≡⟨⟩
+    m * k + n * (m * k)
+  ≡⟨ cong (m * k +_) (*-assoc n m k) ⟩
+    m * k + (n * m) * k
+  ≡˘⟨ *-distribʳ-+ k m (n * m) ⟩
+    (m + n * m) * k
+  ≡⟨⟩
+    (suc n * m) * k
   ∎
-
-
-
-
-
-
-
-
-
-
 
 
 -- I'm putting these fixity declarations out of sight here (they are
